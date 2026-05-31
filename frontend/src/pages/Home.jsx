@@ -52,12 +52,20 @@ const Home = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
+            className="flex flex-wrap gap-4"
           >
             <Link 
-              to="/menu" 
-              className="inline-flex items-center px-8 py-4 bg-brand-red text-white text-xs font-bold uppercase tracking-widest rounded-xl hover:bg-red-700 transition-all shadow-lg shadow-brand-red/20 hover:shadow-brand-red/40 transform hover:-translate-y-0.5"
+              to="/login" 
+              className="inline-flex items-center px-8 py-4 bg-brand-red text-white text-xs font-bold uppercase tracking-widest rounded-xl hover:bg-red-700 transition-all shadow-lg shadow-brand-red/25 hover:shadow-brand-red/40 transform hover:-translate-y-0.5"
             >
-              Discover the Menu <ArrowRight className="ml-2.5" size={14} />
+              Order Now <ArrowRight className="ml-2.5" size={14} />
+            </Link>
+            
+            <Link 
+              to="/menu" 
+              className="inline-flex items-center px-8 py-4 bg-white/10 hover:bg-white/20 text-white text-xs font-bold uppercase tracking-widest rounded-xl border border-white/20 hover:border-white/30 backdrop-blur-sm transition-all transform hover:-translate-y-0.5"
+            >
+              Discover the Menu
             </Link>
           </motion.div>
         </div>
