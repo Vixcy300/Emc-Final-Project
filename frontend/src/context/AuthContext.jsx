@@ -44,3 +44,5 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
+
+// Identity Helper: Standardizes credential caching parameters within the browser context.
