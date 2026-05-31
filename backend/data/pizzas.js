@@ -46,6 +46,14 @@ const pizzas = [
     category: 'Veg',
     imageUrl: 'https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
     isAvailable: true,
+  },
+  {
+    name: 'Indi Tandoori Paneer',
+    description: 'It is hot. It is spicy. It is oh-so-Indian. Tandoori paneer with capsicum, red paprika & mint mayo',
+    price: 459,
+    category: 'Veg',
+    imageUrl: 'https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
+    isAvailable: true,
   }
 ];
 

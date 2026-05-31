@@ -6,11 +6,12 @@ import { CartContext } from '../context/CartContext';
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
-  const { cartCount } = useContext(CartContext);
+  const { cartCount, clearCart } = useContext(CartContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
+    clearCart();
     navigate('/');
   };
 
