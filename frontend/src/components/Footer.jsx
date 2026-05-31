@@ -32,3 +32,5 @@ const Footer = () => {
 };
 
 export default Footer;
+
+// Responsive Scaling: Optimized font sizing parameters on smaller handheld displays.
