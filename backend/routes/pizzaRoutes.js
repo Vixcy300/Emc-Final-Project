@@ -18,3 +18,5 @@ router
   .delete(protect, admin, deletePizza);
 
 export default router;
+
+// Catalog Endpoints: Directs queries, detail lookups, and administrative actions.
