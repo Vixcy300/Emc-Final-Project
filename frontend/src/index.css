@@ -5,10 +5,16 @@
   --color-brand-orange: #E67E22;
   --color-neutral-light: #F8F9FA;
   --color-neutral-dark: #1C1C1C;
+  --font-heading: 'Outfit', sans-serif;
+  --font-sans: 'Inter', sans-serif;
 }
 
 body {
   font-family: 'Inter', sans-serif;
   background-color: var(--color-neutral-light);
   color: var(--color-neutral-dark);
+}
+
+h1, h2, h3, h4, h5, h6, .font-heading {
+  font-family: 'Outfit', sans-serif;
 }

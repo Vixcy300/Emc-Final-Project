@@ -15,6 +15,7 @@ import Checkout from './pages/Checkout';
 import OrderHistory from './pages/OrderHistory';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Profile from './pages/Profile';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminPizzas from './pages/AdminPizzas';
 import AdminOrders from './pages/AdminOrders';
@@ -30,7 +31,23 @@ function AppContent() {
   return (
     <Router>
       <div className="flex flex-col min-h-screen">
-        <Toaster position="top-right" />
+        <Toaster 
+          position="bottom-right" 
+          toastOptions={{
+            duration: 4000,
+            style: {
+              background: '#ffffff',
+              color: '#1c1c1c',
+              fontFamily: '"Outfit", sans-serif',
+              fontSize: '14px',
+              fontWeight: '500',
+              borderRadius: '12px',
+              padding: '12px 20px',
+              boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)',
+              border: '1px solid #f3f4f6',
+            },
+          }}
+        />
         <Navbar />
         <main className="flex-grow">
           <Routes>
@@ -54,6 +71,11 @@ function AppContent() {
             <Route path="/orders" element={
               <ProtectedRoute>
                 <OrderHistory />
+              </ProtectedRoute>
+            } />
+            <Route path="/profile" element={
+              <ProtectedRoute>
+                <Profile />
               </ProtectedRoute>
             } />
             
