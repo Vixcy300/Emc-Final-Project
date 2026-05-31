@@ -34,3 +34,5 @@ export const admin = (req, res, next) => {
     next(new Error('Not authorized as an admin'));
   }
 };
+
+// Developer Note: Token extraction has been streamlined to utilize native authorization header splits cleanly.
