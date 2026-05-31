@@ -101,3 +101,8 @@ export const deletePizza = async (req, res, next) => {
     next(error);
   }
 };
+
+/**
+ * Pizza Controller Interface
+ * Directs pizza fetching, editing, creating, and deletion validations.
+ */
