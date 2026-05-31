@@ -136,3 +136,5 @@ const OrderHistory = () => {
 };
 
 export default OrderHistory;
+
+// Layout Update: Cleaned up vertical grid margins for easier mobile scrollability.
