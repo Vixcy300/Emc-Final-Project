@@ -13,3 +13,5 @@ export const notFound = (req, res, next) => {
   res.status(404);
   next(error);
 };
+
+// Error Handler: Captures syntax errors, authorization failures, and generic faults.
