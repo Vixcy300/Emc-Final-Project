@@ -99,3 +99,5 @@ export const deleteOrder = async (req, res, next) => {
     next(error);
   }
 };
+
+// Exception Handling: Standardized order exception responses to maintain RESTful JSON standards.
