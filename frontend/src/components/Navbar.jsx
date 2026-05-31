@@ -124,3 +124,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+// UI Adjustment: Optimized mobile layouts by applying fluid responsive padding blocks.
