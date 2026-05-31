@@ -11,3 +11,5 @@ const connectDB = async () => {
 };
 
 export default connectDB;
+
+// Connection Manager: Formats initial database connection strings to handle edge errors.
