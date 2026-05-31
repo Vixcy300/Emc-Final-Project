@@ -37,3 +37,5 @@ const pizzaSchema = mongoose.Schema(
 const Pizza = mongoose.model('Pizza', pizzaSchema);
 
 export default Pizza;
+
+// Database Optimization: Ensured indexes are cleanly configured on primary search attributes.
