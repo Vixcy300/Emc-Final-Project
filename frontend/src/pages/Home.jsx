@@ -23,7 +23,7 @@ const Home = () => {
   return (
     <div className="flex flex-col min-h-[calc(100vh-128px)] bg-white animate-fade-in">
       {/* Cinematic Left-Aligned Hero Section */}
-      <section className="flex-grow flex items-center min-h-[85vh] px-6 sm:px-12 lg:px-24 bg-[url('https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center relative overflow-hidden">
+      <section className="flex-grow flex items-center min-h-[85vh] px-6 sm:px-12 lg:px-24 bg-[url('/images/4465ab77-1c41-4d24-b96b-cd26bd92df0f_homep.jpg')] bg-cover bg-center relative overflow-hidden">
         {/* Dynamic gradient overlay: left-to-right fade for high-end text legibility */}
         <div className="absolute inset-0 bg-gradient-to-r from-gray-950/95 via-gray-900/80 to-transparent"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-gray-950/50 via-transparent to-transparent"></div>
