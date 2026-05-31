@@ -3,35 +3,55 @@ import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
 import { Package } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const OrderHistory = () => {
   const { user } = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const fetchOrders = async () => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      };
+      const { data } = await axios.get('/api/orders/my', config);
+      if (data.success) {
+        setOrders(data.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
+      }
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchOrders = async () => {
+    if (user) {
+      fetchOrders();
+    }
+  }, [user]);
+
+  const cancelOrder = async (orderId) => {
+    if (window.confirm('Are you sure you want to cancel this order?')) {
       try {
         const config = {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },
         };
-        const { data } = await axios.get('/api/orders/my', config);
+        const { data } = await axios.delete(`/api/orders/${orderId}`, config);
         if (data.success) {
-          setOrders(data.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
+          toast.success('Order cancelled successfully');
+          setOrders(prev => prev.filter(o => o._id !== orderId));
         }
-        setLoading(false);
       } catch (error) {
-        console.error(error);
-        setLoading(false);
+        toast.error(error.response?.data?.message || 'Failed to cancel order');
       }
-    };
-
-    if (user) {
-      fetchOrders();
     }
-  }, [user]);
+  };
 
   const getStatusColor = (status) => {
     switch(status) {
@@ -80,10 +100,19 @@ const OrderHistory = () => {
                   <p className="text-sm text-gray-500">Total Amount</p>
                   <p className="font-bold text-brand-red">₹{order.totalAmount}</p>
                 </div>
-                <div>
+                <div className="flex items-center gap-3">
                   <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${getStatusColor(order.status)}`}>
                     {order.status}
                   </span>
+                  {order.status === 'Pending' && (
+                    <button 
+                      onClick={() => cancelOrder(order._id)}
+                      className="px-3.5 py-1 text-xs font-bold text-red-600 bg-red-50 hover:bg-red-600 hover:text-white border border-red-100 rounded-full transition-colors cursor-pointer"
+                      title="Cancel this order"
+                    >
+                      Cancel
+                    </button>
+                  )}
                 </div>
               </div>
               
