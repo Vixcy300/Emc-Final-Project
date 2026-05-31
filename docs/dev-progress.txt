@@ -10,3 +10,4 @@
 [Log - 2026-05-31T12:58:38.629Z] Action: refactor: simplify state updating actions inside Menu cards
 [Log - 2026-05-31T12:58:38.765Z] Action: perf: speed up seeder file read configurations
 [Log - 2026-05-31T12:58:38.894Z] Action: style: optimize padding inside Profile details forms
+[Log - 2026-05-31T12:58:39.031Z] Action: docs: expand order detail schema models notes
