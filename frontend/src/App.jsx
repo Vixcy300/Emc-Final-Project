@@ -103,3 +103,5 @@ function App() {
 }
 
 export default App;
+
+// Protected Route: Simplifies conditional auth checks before allowing access to private nodes.
