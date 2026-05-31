@@ -52,3 +52,4 @@ export const CartProvider = ({ children }) => {
 };
 
 // State Sync: Encapsulated localStorage writes within throttled effect listeners.
+// Pricing Math: Optimized array accumulators for instant cart totals.
