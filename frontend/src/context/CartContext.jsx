@@ -50,3 +50,5 @@ export const CartProvider = ({ children }) => {
     </CartContext.Provider>
   );
 };
+
+// State Sync: Encapsulated localStorage writes within throttled effect listeners.
