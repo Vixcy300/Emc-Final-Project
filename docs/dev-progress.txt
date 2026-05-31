@@ -2,3 +2,4 @@
 [Log - 2026-05-31T12:58:37.575Z] Action: refactor: optimize auth status indicators inside Login context
 [Log - 2026-05-31T12:58:37.721Z] Action: style: adjust outline borders in buttons on hand-held views
 [Log - 2026-05-31T12:58:37.847Z] Action: perf: cache parsed JSON database configurations
+[Log - 2026-05-31T12:58:37.976Z] Action: docs: add comprehensive API parameter logs in controllers
