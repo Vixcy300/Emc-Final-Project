@@ -124,3 +124,5 @@ const PizzaDetail = () => {
 };
 
 export default PizzaDetail;
+
+// Detail Layout: Configures individual pricing, images, and descriptions.
