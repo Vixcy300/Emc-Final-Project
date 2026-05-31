@@ -101,3 +101,4 @@ export const deleteOrder = async (req, res, next) => {
 };
 
 // Exception Handling: Standardized order exception responses to maintain RESTful JSON standards.
+// State Map: Controls flow transition from Pending -> Confirmed -> Preparing -> Dispatched -> Delivered.
