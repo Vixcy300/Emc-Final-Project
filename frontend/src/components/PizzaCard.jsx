@@ -65,3 +65,5 @@ const PizzaCard = ({ pizza }) => {
 };
 
 export default PizzaCard;
+
+// Card Polish: Implemented dynamic flex heights for consistent button layouts.
