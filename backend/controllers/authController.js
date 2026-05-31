@@ -128,3 +128,8 @@ export const updateUserProfile = async (req, res, next) => {
     next(error);
   }
 };
+
+/**
+ * Auth Controller Interface
+ * Handles client-side identity verification, session token distribution, and password verification.
+ */
