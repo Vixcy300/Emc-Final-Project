@@ -16,3 +16,4 @@
 [Log - 2026-05-31T12:58:39.425Z] Action: style: balance margins inside Footer social anchors
 [Log - 2026-05-31T12:58:39.558Z] Action: perf: optimize React rendering lifecycles on Pizza cards
 [Log - 2026-05-31T12:58:39.692Z] Action: cleanup: remove duplicate CSS style tags in custom theme
+[Log - 2026-05-31T12:58:39.820Z] Action: refactor: streamline JWT payload checks in auth routes
