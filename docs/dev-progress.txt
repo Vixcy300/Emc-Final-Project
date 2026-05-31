@@ -1,0 +1,2 @@
+
+[Log - 2026-05-31T12:58:37.575Z] Action: refactor: optimize auth status indicators inside Login context
