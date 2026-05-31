@@ -1,11 +1,20 @@
 import { Link, Navigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Pizza, Clock, Award } from 'lucide-react';
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../context/AuthContext';
 
 const Home = () => {
   const { user } = useContext(AuthContext);
+  const words = ['Redefined.', 'Perfected.', 'Elevated.'];
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % words.length);
+    }, 2800);
+    return () => clearInterval(interval);
+  }, []);
 
   if (user) {
     return <Navigate to="/menu" replace />;
@@ -26,7 +35,7 @@ const Home = () => {
             transition={{ duration: 0.5 }}
             className="inline-block text-[10px] font-bold tracking-widest text-brand-orange uppercase bg-orange-500/10 border border-brand-orange/20 px-3 py-1 rounded-md mb-6"
           >
-            Artisanal & Gourmet
+            48-Hour Slow Fermentation
           </motion.span>
 
           <motion.h1 
@@ -36,7 +45,20 @@ const Home = () => {
             className="text-4xl sm:text-5xl lg:text-7xl font-extrabold text-white mb-6 tracking-tight leading-[1.1] font-heading"
           >
             Gourmet, <br />
-            <span className="text-brand-red">Refined.</span>
+            <span className="relative block h-[1.15em] text-brand-red overflow-hidden mt-2">
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={words[index]}
+                  initial={{ y: 40, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: -40, opacity: 0 }}
+                  transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                  className="absolute left-0 top-0 text-brand-red block w-full"
+                >
+                  {words[index]}
+                </motion.span>
+              </AnimatePresence>
+            </span>
           </motion.h1>
           
           <motion.p 
