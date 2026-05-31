@@ -12,3 +12,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <App />
   </React.StrictMode>,
 )
+
+// Initialization Loader: Directs application assembly, root elements, and state injections.
