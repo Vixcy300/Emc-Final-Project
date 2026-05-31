@@ -133,3 +133,5 @@ const Home = () => {
 };
 
 export default Home;
+
+// Layout Stability: Sealed hero heights to prevent shift variables.
