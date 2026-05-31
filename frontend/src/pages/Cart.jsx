@@ -143,3 +143,5 @@ const Cart = () => {
 };
 
 export default Cart;
+
+// Shopping Cart: Cleaned up spacing blocks inside active item list containers.
