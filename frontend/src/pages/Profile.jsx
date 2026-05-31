@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import { User, Mail, Shield, Calendar, ArrowLeft, ShoppingBag } from 'lucide-react';
+import { User, Mail, Shield, ShieldCheck, Key, MapPin, CreditCard, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Profile = () => {
@@ -8,138 +8,148 @@ const Profile = () => {
 
   if (!user) {
     return (
-      <div className="max-w-md mx-auto my-16 p-8 bg-white rounded-2xl shadow-lg text-center border border-gray-100">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4">Access Denied</h2>
-        <p className="text-gray-600 mb-6">Please log in to view your profile page.</p>
-        <Link to="/login" className="inline-block px-6 py-3 bg-brand-red text-white font-semibold rounded-xl hover:bg-red-700 transition-colors shadow-md shadow-red-200">
-          Go to Login
+      <div className="max-w-md mx-auto my-16 p-8 bg-white rounded-2xl shadow-sm text-center border border-gray-100">
+        <h2 className="text-xl font-bold text-gray-900 mb-2">Authentication Required</h2>
+        <p className="text-gray-500 mb-6 text-sm">Please sign in to access your personal account settings.</p>
+        <Link to="/login" className="inline-block px-5 py-2.5 bg-brand-red text-white text-sm font-semibold rounded-lg hover:bg-red-700 transition-colors shadow-sm">
+          Sign In
         </Link>
       </div>
     );
   }
 
-  // Get first letter of user's name
-  const firstLetter = user.name ? user.name.charAt(0).toUpperCase() : 'U';
+  const initial = user.name ? user.name.charAt(0).toUpperCase() : 'U';
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12">
+    <div className="max-w-5xl mx-auto px-6 py-12">
+      {/* Navigation */}
       <div className="mb-8">
-        <Link to="/" className="inline-flex items-center text-gray-600 hover:text-brand-red font-medium transition-colors">
-          <ArrowLeft size={18} className="mr-2" /> Back to Home
+        <Link to="/" className="inline-flex items-center text-sm text-gray-500 hover:text-gray-900 font-medium transition-colors">
+          <ArrowLeft size={16} className="mr-2" /> Back to dashboard
         </Link>
       </div>
 
-      <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">
-        {/* Banner Area */}
-        <div className="h-40 bg-gradient-to-r from-brand-red to-brand-orange relative">
-          <div className="absolute -bottom-16 left-8">
-            <div className="w-32 h-32 rounded-2xl bg-white p-2 shadow-lg border border-gray-100 flex items-center justify-center">
-              <div className="w-full h-full rounded-xl bg-brand-red text-white flex items-center justify-center text-5xl font-extrabold font-heading">
-                {firstLetter}
-              </div>
+      <div className="bg-white rounded-2xl border border-gray-200/80 shadow-sm overflow-hidden">
+        {/* Header Block */}
+        <div className="p-8 border-b border-gray-100 bg-gray-50/50 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="flex items-center space-x-5">
+            <div className="w-16 h-16 rounded-full bg-brand-red text-white flex items-center justify-center text-2xl font-bold select-none shadow-inner">
+              {initial}
             </div>
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900 leading-tight">{user.name}</h1>
+              <p className="text-sm text-gray-500 mt-1">{user.email}</p>
+            </div>
+          </div>
+
+          <div className="flex items-center space-x-3">
+            <span className={`inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold ${user.role === 'admin' ? 'bg-red-50 text-brand-red border border-brand-red/10' : 'bg-gray-100 text-gray-700 border border-gray-200'}`}>
+              <Shield size={12} className="mr-1.5" />
+              {user.role === 'admin' ? 'Administrator' : 'Customer Account'}
+            </span>
           </div>
         </div>
 
-        {/* Profile Details Area */}
-        <div className="pt-20 px-8 pb-10">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between border-b border-gray-100 pb-8 mb-8">
+        {/* Settings Grid */}
+        <div className="p-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Main Account Settings */}
+          <div className="lg:col-span-2 space-y-8">
             <div>
-              <h1 className="text-3xl font-extrabold font-heading text-gray-900 mb-2">{user.name}</h1>
-              <div className="flex flex-wrap gap-2">
-                <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold ${user.role === 'admin' ? 'bg-red-100 text-brand-red' : 'bg-orange-100 text-brand-orange'}`}>
-                  <Shield size={12} className="mr-1" /> {user.role === 'admin' ? 'Administrator' : 'Customer'}
-                </span>
-                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-gray-100 text-gray-600">
-                  <Calendar size={12} className="mr-1" /> Member since May 2026
-                </span>
+              <h2 className="text-base font-bold text-gray-900 uppercase tracking-wider mb-1">Personal Details</h2>
+              <p className="text-xs text-gray-400">Your core login credentials and account identifications.</p>
+              
+              <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="p-4 rounded-xl border border-gray-200/80 flex items-start space-x-3.5">
+                  <div className="p-2 bg-gray-50 rounded-lg text-gray-400">
+                    <User size={18} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Full Name</p>
+                    <p className="text-sm font-semibold text-gray-800 mt-0.5 truncate">{user.name}</p>
+                  </div>
+                </div>
+
+                <div className="p-4 rounded-xl border border-gray-200/80 flex items-start space-x-3.5">
+                  <div className="p-2 bg-gray-50 rounded-lg text-gray-400">
+                    <Mail size={18} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Email Address</p>
+                    <p className="text-sm font-semibold text-gray-800 mt-0.5 truncate">{user.email}</p>
+                  </div>
+                </div>
               </div>
             </div>
-            
-            <div className="mt-4 md:mt-0 flex gap-3">
-              <Link to="/orders" className="inline-flex items-center px-5 py-2.5 bg-gray-50 border border-gray-200 text-gray-700 font-semibold rounded-xl hover:bg-gray-100 transition-colors">
-                <ShoppingBag size={18} className="mr-2" /> View Orders
-              </Link>
-              {user.role === 'admin' && (
-                <Link to="/admin" className="inline-flex items-center px-5 py-2.5 bg-brand-orange text-white font-semibold rounded-xl hover:bg-orange-600 transition-colors shadow-md shadow-orange-100">
-                  Admin Panel
-                </Link>
-              )}
+
+            <div>
+              <h2 className="text-base font-bold text-gray-900 uppercase tracking-wider mb-1">Security & Permissions</h2>
+              <p className="text-xs text-gray-400">Settings governing authorization levels and access controls.</p>
+              
+              <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="p-4 rounded-xl border border-gray-200/80 flex items-start space-x-3.5">
+                  <div className="p-2 bg-gray-50 rounded-lg text-gray-400">
+                    <ShieldCheck size={18} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Role Clearance</p>
+                    <p className="text-sm font-semibold text-gray-800 mt-0.5 capitalize">{user.role}</p>
+                  </div>
+                </div>
+
+                <div className="p-4 rounded-xl border border-gray-200/80 flex items-start space-x-3.5">
+                  <div className="p-2 bg-gray-50 rounded-lg text-gray-400">
+                    <Key size={18} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Two-Factor Auth</p>
+                    <p className="text-sm font-semibold text-gray-500 mt-0.5">Not Configured</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* User Credentials Column */}
-            <div className="md:col-span-2 space-y-6">
-              <h2 className="text-xl font-bold font-heading text-gray-800">Account Details</h2>
+          {/* Preferences and Metadata */}
+          <div className="space-y-6">
+            <div className="p-6 rounded-2xl border border-gray-200 bg-gray-50/30">
+              <h3 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">Billing & Delivery</h3>
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="p-4 bg-gray-50 rounded-2xl border border-gray-100 flex items-start space-x-3">
-                  <div className="p-2.5 bg-white rounded-xl text-brand-red shadow-sm">
-                    <User size={20} />
+              <div className="space-y-4">
+                <div className="flex items-start space-x-3">
+                  <div className="p-1.5 bg-white border border-gray-200 rounded text-gray-400 mt-0.5">
+                    <MapPin size={14} />
                   </div>
                   <div>
-                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Full Name</p>
-                    <p className="text-base font-semibold text-gray-800">{user.name}</p>
+                    <h4 className="text-xs font-bold text-gray-700">Default Address</h4>
+                    <p className="text-xs text-gray-500 mt-0.5">Configured during checkout</p>
                   </div>
                 </div>
 
-                <div className="p-4 bg-gray-50 rounded-2xl border border-gray-100 flex items-start space-x-3">
-                  <div className="p-2.5 bg-white rounded-xl text-brand-red shadow-sm">
-                    <Mail size={20} />
+                <div className="flex items-start space-x-3">
+                  <div className="p-1.5 bg-white border border-gray-200 rounded text-gray-400 mt-0.5">
+                    <CreditCard size={14} />
                   </div>
                   <div>
-                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Email Address</p>
-                    <p className="text-base font-semibold text-gray-800 break-all">{user.email}</p>
+                    <h4 className="text-xs font-bold text-gray-700">Preferred Method</h4>
+                    <p className="text-xs text-gray-500 mt-0.5">Cash on Delivery (COD)</p>
                   </div>
                 </div>
+              </div>
 
-                <div className="p-4 bg-gray-50 rounded-2xl border border-gray-100 flex items-start space-x-3">
-                  <div className="p-2.5 bg-white rounded-xl text-brand-red shadow-sm">
-                    <Shield size={20} />
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Account Role</p>
-                    <p className="text-base font-semibold text-gray-800 capitalize">{user.role}</p>
-                  </div>
-                </div>
-
-                <div className="p-4 bg-gray-50 rounded-2xl border border-gray-100 flex items-start space-x-3">
-                  <div className="p-2.5 bg-white rounded-xl text-brand-red shadow-sm">
-                    <Calendar size={20} />
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Account Status</p>
-                    <p className="text-base font-semibold text-green-600">Active & Verified</p>
-                  </div>
+              <div className="mt-8 pt-6 border-t border-gray-200/60">
+                <div className="flex justify-between items-center text-xs text-gray-400">
+                  <span>System Status</span>
+                  <span className="font-semibold text-green-600 flex items-center">
+                    <span className="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5 animate-pulse"></span>
+                    Verified
+                  </span>
                 </div>
               </div>
             </div>
-
-            {/* Quick Stats Widget */}
-            <div className="p-6 bg-gradient-to-br from-gray-50 to-white rounded-3xl border border-gray-100 flex flex-col justify-between">
-              <div>
-                <h3 className="text-lg font-bold font-heading text-gray-800 mb-4">Order Statistics</h3>
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center py-2 border-b border-gray-100">
-                    <span className="text-gray-500 text-sm">Preferred Choice</span>
-                    <span className="font-semibold text-gray-800 text-sm">Veggie Delight</span>
-                  </div>
-                  <div className="flex justify-between items-center py-2 border-b border-gray-100">
-                    <span className="text-gray-500 text-sm">Delivery Address</span>
-                    <span className="font-semibold text-gray-800 text-sm">Saved Profile</span>
-                  </div>
-                  <div className="flex justify-between items-center py-2">
-                    <span className="text-gray-500 text-sm">Payment Method</span>
-                    <span className="font-semibold text-gray-800 text-sm">Cash on Delivery</span>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="mt-8 p-4 bg-brand-red/5 rounded-2xl border border-brand-red/10 text-center">
-                <p className="text-xs text-brand-red font-bold uppercase tracking-widest mb-1">Loyalty Tier</p>
-                <p className="text-lg font-black font-heading text-brand-red">GOLD PIZZA LOVER</p>
-              </div>
+            
+            <div className="text-center p-4 rounded-xl border border-dashed border-gray-200">
+              <p className="text-[10px] text-gray-400 font-semibold uppercase tracking-wider">Session Token</p>
+              <p className="text-xs font-mono text-gray-500 mt-1 truncate">Active Session (JWT Secured)</p>
             </div>
           </div>
         </div>
