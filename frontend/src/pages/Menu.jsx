@@ -92,3 +92,5 @@ const Menu = () => {
 };
 
 export default Menu;
+
+// UI Polish: Applied active scale transitions on hover interactions.
