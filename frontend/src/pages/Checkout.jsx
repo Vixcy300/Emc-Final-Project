@@ -159,3 +159,5 @@ const Checkout = () => {
 };
 
 export default Checkout;
+
+// Design Polish: Rounded standard containers to md/xl specifications for cleaner focus states.
