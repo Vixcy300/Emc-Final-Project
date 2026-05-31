@@ -39,6 +39,10 @@ const Navbar = () => {
           <div className="flex items-center space-x-6">
             <Link to="/menu" className="text-gray-700 hover:text-brand-red font-medium transition-colors">Menu</Link>
             
+            {user && (
+              <Link to="/orders" className="text-gray-700 hover:text-brand-red font-medium transition-colors">Orders</Link>
+            )}
+            
             <Link to="/cart" className="relative text-gray-700 hover:text-brand-red transition-colors mr-2">
               <ShoppingCart size={24} />
               {cartCount > 0 && (

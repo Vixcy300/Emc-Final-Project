@@ -10,15 +10,14 @@ connectDB();
 
 const addPizzaData = async () => {
   try {
-    for (const pizza of pizzas) {
-      const exists = await Pizza.findOne({ name: pizza.name });
-      if (!exists) {
-        await Pizza.create(pizza);
-        console.log(`Added new pizza: ${pizza.name}`);
-      } else {
-        console.log(`Pizza already exists: ${pizza.name}`);
-      }
-    }
+    // 1. Delete all existing pizzas in the database to do a clean sync of the 10 new local-photo pizzas
+    const deleteResult = await Pizza.deleteMany({});
+    console.log(`Removed ${deleteResult.deletedCount} old pizzas from database.`);
+
+    // 2. Insert all the new pizzas with their local photos and names
+    const insertResult = await Pizza.insertMany(pizzas);
+    console.log(`Successfully imported ${insertResult.length} new gourmet pizzas with local photos!`);
+    
     console.log('Database synchronization completed successfully!');
     process.exit();
   } catch (error) {
