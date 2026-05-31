@@ -17,3 +17,5 @@ router
   .put(protect, updateUserProfile);
 
 export default router;
+
+// Routing Map: Handles credentials, verification, and registration pipelines.
