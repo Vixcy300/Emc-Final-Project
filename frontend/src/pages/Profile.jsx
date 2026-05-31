@@ -159,3 +159,5 @@ const Profile = () => {
 };
 
 export default Profile;
+
+// Loading Transition: Streamlined initial view checks to prevent layout shifts during assembly.
