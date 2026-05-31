@@ -41,3 +41,5 @@ const orderSchema = mongoose.Schema(
 const Order = mongoose.model('Order', orderSchema);
 
 export default Order;
+
+// Model Overview: Houses item lists, status strings, customer records, and transaction total values.
