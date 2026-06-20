@@ -1,13 +1,10 @@
 import Pizza from '../models/Pizza.js';
 
-// @desc    Fetch all pizzas
-// @route   GET /api/pizzas
-// @access  Public
+
 export const getPizzas = async (req, res, next) => {
   try {
     const query = req.query.category ? { category: req.query.category } : {};
-    // If not admin, maybe only fetch available pizzas, but for now fetch based on available or all if admin
-    // We'll keep it simple: fetch all based on query. The frontend can filter `isAvailable` for customers.
+    
     const pizzas = await Pizza.find(query);
     res.json({ success: true, count: pizzas.length, data: pizzas });
   } catch (error) {
@@ -15,9 +12,7 @@ export const getPizzas = async (req, res, next) => {
   }
 };
 
-// @desc    Fetch single pizza
-// @route   GET /api/pizzas/:id
-// @access  Public
+
 export const getPizzaById = async (req, res, next) => {
   try {
     const pizza = await Pizza.findById(req.params.id);
@@ -32,9 +27,7 @@ export const getPizzaById = async (req, res, next) => {
   }
 };
 
-// @desc    Create a pizza
-// @route   POST /api/pizzas
-// @access  Private/Admin
+
 export const createPizza = async (req, res, next) => {
   try {
     const { name, description, price, category, imageUrl, isAvailable } = req.body;
@@ -55,9 +48,7 @@ export const createPizza = async (req, res, next) => {
   }
 };
 
-// @desc    Update a pizza
-// @route   PUT /api/pizzas/:id
-// @access  Private/Admin
+
 export const updatePizza = async (req, res, next) => {
   try {
     const { name, description, price, category, imageUrl, isAvailable } = req.body;
