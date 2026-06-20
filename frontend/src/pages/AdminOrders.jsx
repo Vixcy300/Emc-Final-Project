@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
 import toast from 'react-hot-toast';
+import { XCircle } from 'lucide-react';
 
 const AdminOrders = () => {
   const { user } = useContext(AuthContext);
@@ -37,6 +38,19 @@ const AdminOrders = () => {
     }
   };
 
+  const cancelOrder = async (id) => {
+    if (window.confirm('Are you sure you want to cancel this pending order?')) {
+      try {
+        const config = { headers: { Authorization: `Bearer ${user.token}` } };
+        await axios.delete(`/api/orders/${id}`, config);
+        toast.success('Order cancelled successfully');
+        fetchOrders();
+      } catch (error) {
+        toast.error(error.response?.data?.message || 'Failed to cancel order');
+      }
+    }
+  };
+
   const statusOptions = ['Pending', 'Confirmed', 'Preparing', 'Out for Delivery', 'Delivered'];
 
   return (
@@ -54,7 +68,7 @@ const AdminOrders = () => {
                 <th className="py-3 px-4 font-semibold text-gray-600">Customer</th>
                 <th className="py-3 px-4 font-semibold text-gray-600">Amount</th>
                 <th className="py-3 px-4 font-semibold text-gray-600">Date</th>
-                <th className="py-3 px-4 font-semibold text-gray-600">Update Status</th>
+                <th className="py-3 px-4 font-semibold text-gray-600">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -67,7 +81,7 @@ const AdminOrders = () => {
                   </td>
                   <td className="py-3 px-4 font-bold">₹{order.totalAmount}</td>
                   <td className="py-3 px-4 text-sm">{new Date(order.createdAt).toLocaleDateString()}</td>
-                  <td className="py-3 px-4">
+                  <td className="py-3 px-4 flex items-center space-x-3">
                     <select 
                       value={order.status}
                       onChange={(e) => updateStatus(order._id, e.target.value)}
@@ -79,6 +93,15 @@ const AdminOrders = () => {
                         <option key={opt} value={opt}>{opt}</option>
                       ))}
                     </select>
+                    {order.status === 'Pending' && (
+                      <button 
+                        onClick={() => cancelOrder(order._id)}
+                        className="text-red-500 hover:text-red-700 mt-1" 
+                        title="Cancel Order"
+                      >
+                        <XCircle size={22} />
+                      </button>
+                    )}
                   </td>
                 </tr>
               ))}
